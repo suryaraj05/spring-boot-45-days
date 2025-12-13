@@ -9,7 +9,7 @@ spring-boot-45-days/day-01-dependency-injection/README.md
 
 ### 📘 **Day 01 – Dependency Injection & Spring Beans**
 
-````markdown
+```
 # Day 01 – Dependency Injection & Spring Beans
 
 ## 📌 Topics Covered
