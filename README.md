@@ -30,4 +30,5 @@ Each day contains:
 
 ---
 
-**Status:** Day 1 Completed ✅
+**Status:** Day 1, 2, 3, 4 Completed ✅
+
