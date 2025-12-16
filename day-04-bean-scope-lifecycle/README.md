@@ -1,43 +1,41 @@
-# Day 04 – Bean Scopes in Spring
+## Bean Initialization: Lazy vs Eager
 
-## Bean Scopes in Spring
+### Eager Initialization (Default)
+- Beans are created at application startup
+- Dependencies are validated early
+- Application fails fast if configuration is wrong
 
-### Core Scopes
-- **Singleton**: One bean instance per Spring IoC container (default)
-- **Prototype**: A new bean instance is created every time it is requested
-
-### Web-Aware Scopes (Only for Web Applications)
-- **Request**: One instance per HTTP request
-- **Session**: One instance per HTTP session
-- **Application**: One instance per web application lifecycle
-- **WebSocket**: One instance per WebSocket session
+### Lazy Initialization
+- Bean is created only when it is first requested
+- Startup time may improve
+- Errors appear at runtime when the bean is used
 
 ---
 
-## Spring Singleton vs Java Singleton (GOF)
+## When to Use Lazy Initialization
+- Heavy or resource-intensive beans
+- Optional features
+- Rarely used components
 
-| Spring Singleton | Java Singleton (GOF) |
-|-----------------|---------------------|
-| One instance per Spring IoC container | One instance per JVM |
-| Managed by Spring | Managed by Java code |
-| Can have multiple instances across containers | Strict single instance |
-
----
-
-## Prototype vs Singleton Comparison
-
-| Feature | Singleton | Prototype |
-|-------|----------|-----------|
-| Instances | One per IoC container | Many per IoC container |
-| Creation | Created at startup (default) | Created on demand |
-| Default | Yes | No |
-| Annotation | Default / `@Scope("singleton")` | `@Scope("prototype")` |
-| Usage | Very common | Rare |
-| Recommended for | Stateless beans | Stateful beans (with care) |
+## When to Avoid Lazy Initialization
+- Core business services
+- Security components
+- Critical infrastructure beans
 
 ---
 
-## Important Notes
-- Singleton beans are fully managed by Spring
-- Prototype beans are created by Spring but **not destroyed by Spring**
-- Web scopes are available only in web-aware application contexts
+## Comparison
+
+| Feature | Lazy | Eager |
+|------|------|------|
+| Initialization time | On first use | Application startup |
+| Default | No | Yes |
+| Annotation | `@Lazy` | No annotation |
+| Error detection | Runtime | Startup |
+| Usage | Rare | Common |
+| Startup memory | Lower | Higher |
+
+---
+
+## Key Insight
+Eager initialization is preferred in production systems because it ensures early failure and system stability.
